@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Finance Bank - Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-container {
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-header i {
+            font-size: 48px;
+            color: #1e3c72;
+            margin-bottom: 10px;
+        }
+
+        .login-header h1 {
+            color: #1e3c72;
+            font-size: 24px;
+            margin-bottom: 5px;
+        }
+
+        .login-header p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #666;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #1e3c72;
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 12px;
+            background: #1e3c72;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .login-button:hover {
+            background: #2a5298;
+        }
+
+        .login-footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .login-footer a {
+            color: #1e3c72;
+            text-decoration: none;
+            font-size: 14px;
+            margin: 0 10px;
+        }
+
+        .login-footer a:hover {
+            text-decoration: underline;
+        }
+
+        .error-message {
+            color: #e74c3c;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <i class="fas fa-university"></i>
+            <h1>Student Finance Bank</h1>
+            <p>Welcome back! Please login to your account.</p>
+        </div>
+        <form id="loginForm">
+            <div class="form-group">
+                <label>Account Number</label>
+                <input type="text" id="accountNumber" required>
+                <div class="error-message" id="accountError"></div>
+            </div>
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="password" required>
+                <div class="error-message" id="passwordError"></div>
+            </div>
+            <button type="submit" class="login-button">Login</button>
+        </form>
+        <div class="login-footer">
+            <a href="#" id="forgotPassword">Forgot Password?</a>
+            <a href="#" id="registerAccount">Register Account</a>
+        </div>
+    </div>
+
+    <script>
+        // Demo credentials
+        const demoCredentials = {
+            accountNumber: '1234567890',
+            password: 'demo123'
+        };
+
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const accountNumber = document.getElementById('accountNumber').value;
+            const password = document.getElementById('password').value;
+            
+            // Reset error messages
+            document.getElementById('accountError').style.display = 'none';
+            document.getElementById('passwordError').style.display = 'none';
+            
+            // Validate credentials
+            if (accountNumber === demoCredentials.accountNumber && password === demoCredentials.password) {
+                localStorage.setItem('isLoggedIn', 'true');
+                window.location.href = 'dashboard.html';
+            } else {
+                if (accountNumber !== demoCredentials.accountNumber) {
+                    document.getElementById('accountError').textContent = 'Invalid account number';
+                    document.getElementById('accountError').style.display = 'block';
+                }
+                if (password !== demoCredentials.password) {
+                    document.getElementById('passwordError').textContent = 'Invalid password';
+                    document.getElementById('passwordError').style.display = 'block';
+                }
+            }
+        });
+
+        // Handle forgot password
+        document.getElementById('forgotPassword').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Please contact your bank administrator to reset your password.');
+        });
+
+        // Handle register account
+        document.getElementById('registerAccount').addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('Please visit your nearest branch to open an account.');
+        });
+    </script>
+</body>
+</html> 
